@@ -1,5 +1,5 @@
 import './style.css'
-import { Lexer } from './lexer.js'
+import { parseSQL } from './moo.js'
 
 const btn = document.getElementById('prove');
 const errorContainer = document.getElementById('message');
@@ -10,14 +10,13 @@ btn.onclick = (_e) => {
   check(textArea?.value);
 }
 
-const check = (text) => {
+const check = (_e) => {
   try {
-    const lexer = new Lexer();
-    lexer.parse(text);
+    parseSQL(textArea?.value)
     showMessage('Validación correcta.')
   } catch(err) {
     console.log({err});
-    showError(err);
+    showError(err.message);
   }
 }
 
